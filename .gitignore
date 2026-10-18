@@ -1,0 +1,12 @@
+# Bookings belong to the shop, not the repo
+bookings.log
+brain/shops/*/bookings.log
+
+# Python
+__pycache__/
+*.py[cod]
+.venv/
+venv/
+
+# Local secrets / env overrides
+.env

@@ -1,0 +1,58 @@
+# This is a fictional example shop. Copy this whole folder for each real shop:
+#   brain/shops/<shop-id>/config.yaml
+# and fill in that shop's real details. The brain reads this file every time
+# it answers, so edits take effect on the next message (no restart needed).
+
+shop_name: "Sample Auto Repair"
+town: "Nashville, TN"
+address: "1234 Gallatin Pike S, Nashville, TN 37216"
+phone: "(615) 555-0147"
+
+hours:
+  monday_friday: "8:00 AM - 6:00 PM"
+  saturday: "8:00 AM - 2:00 PM"
+  sunday: "Closed"
+
+# Routine jobs the brain is allowed to quote. Price = parts + labor, flat.
+# The brain will ONLY quote these numbers -- it never guesses prices.
+services:
+  - name: "Oil change (synthetic blend)"
+    price: 49.99
+    note: "most cars and trucks"
+  - name: "Oil change (full synthetic)"
+    price: 69.99
+    note: ""
+  - name: "Front brake pads (per axle)"
+    price: 189.00
+    note: "includes rotor inspection"
+  - name: "Brake pads + rotors (per axle)"
+    price: 329.00
+    note: ""
+  - name: "Battery replacement"
+    price: 179.00
+    note: "includes testing; most group sizes"
+  - name: "Tire rotation"
+    price: 29.99
+    note: ""
+  - name: "Wheel alignment"
+    price: 89.99
+    note: ""
+  - name: "A/C recharge"
+    price: 129.99
+    note: ""
+  - name: "Check-engine diagnostic"
+    price: 99.00
+    note: "fee applied to the repair if you go ahead with it"
+  - name: "Transmission fluid service"
+    price: 149.99
+    note: ""
+
+# How booking works at this shop. The brain follows these rules when it
+# takes a booking request.
+booking:
+  slots: "Monday-Friday 8 AM to 6 PM, Saturday 8 AM to 2 PM. Closed Sunday."
+  needs: "name, phone number, vehicle year/make/model, what service they need, preferred day and morning/afternoon"
+  promise: "We confirm every booking with a text or call before the appointment."
+
+# First message a visitor sees when they open the chat widget.
+greeting: "Hey, this is the front desk for Sample Auto Repair. What can I do for you?"
