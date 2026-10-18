@@ -24,6 +24,8 @@ from datetime import datetime
 import requests
 import yaml
 from flask import Flask, jsonify, request
+from classifier import classify_message, log_escalation, HANDOFF_REPLY
+
 
 # --- Settings (change these if you need to) -------------------------------
 PORT = 8100                       # port this server listens on
@@ -160,6 +162,11 @@ def chat():
     if err:
         return jsonify({"error": err}), 404
 
+    # Phase 2: quick sort - sensitive messages go to the shop, not the AI.
+    if classify_message(message) == "human":
+        log_escalation(shop_id, session_id, message, SHOPS_DIR)
+        return jsonify({"reply": HANDOFF_REPLY})
+
     key = shop_id + "|" + session_id
     history = histories.get(key)
     if history is None:
@@ -204,3 +211,5 @@ if __name__ == "__main__":
     print("AI Front Desk brain starting on port %d ..." % PORT)
     print("Ollama model: %s (%s)" % (OLLAMA_MODEL, OLLAMA_URL))
     app.run(host="127.0.0.1", port=PORT)
+
+
